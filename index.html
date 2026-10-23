@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Compara dos versiones de un archivo y visualiza los cambios línea por línea."
+    />
+    <meta name="theme-color" content="#08111f" />
+    <title>VP · Comparador de código</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="site-header">
+        <a class="brand" href="#" aria-label="VP, inicio">
+          <span>VP</span>
+          <span class="brand-name">Diff</span>
+        </a>
+        <div class="header-meta">
+          <span class="status-dot" aria-hidden="true"></span>
+          Todo ocurre en tu navegador
+        </div>
+      </header>
+
+      <main>
+        <section class="hero" aria-labelledby="page-title">
+          <div class="eyebrow">COMPARACIÓN LÍNEA A LÍNEA</div>
+          <h1 id="page-title">Encuentra lo que cambió.<br /><em>Sin ruido.</em></h1>
+          <p>
+            Pega dos versiones de tu archivo y detecta al instante qué líneas se
+            añadieron, eliminaron o permanecen iguales.
+          </p>
+        </section>
+
+        <section class="workspace" aria-label="Comparador de código">
+          <div class="workspace-toolbar">
+            <div class="file-label">
+              <span class="file-icon" aria-hidden="true">&lt;/&gt;</span>
+              <div>
+                <strong>Comparación sin guardar</strong>
+                <small>El contenido nunca sale de tu dispositivo</small>
+              </div>
+            </div>
+
+            <div class="toolbar-actions">
+              <button class="button button-ghost" id="sampleButton" type="button">
+                Cargar ejemplo
+              </button>
+              <button class="button button-icon" id="swapButton" type="button" title="Intercambiar versiones" aria-label="Intercambiar versiones">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 7 3-3m-3 3 3 3M7 7h10a3 3 0 0 1 3 3v1M17 17l-3 3m3-3-3-3m3 3H7a3 3 0 0 1-3-3v-1"/></svg>
+              </button>
+              <button class="button button-ghost danger" id="clearButton" type="button">
+                Limpiar
+              </button>
+            </div>
+          </div>
+
+          <div class="editors" id="editors">
+            <label class="editor-panel">
+              <span class="editor-heading">
+                <span><i class="version-mark before"></i>Versión original</span>
+                <small id="originalCount">0 líneas</small>
+              </span>
+              <textarea
+                id="originalCode"
+                spellcheck="false"
+                autocapitalize="off"
+                autocomplete="off"
+                placeholder="Pega aquí el código original…"
+                aria-label="Código original"
+              ></textarea>
+            </label>
+
+            <div class="editor-divider" aria-hidden="true">
+              <span>VS</span>
+            </div>
+
+            <label class="editor-panel">
+              <span class="editor-heading">
+                <span><i class="version-mark after"></i>Versión modificada</span>
+                <small id="modifiedCount">0 líneas</small>
+              </span>
+              <textarea
+                id="modifiedCode"
+                spellcheck="false"
+                autocapitalize="off"
+                autocomplete="off"
+                placeholder="Pega aquí el código modificado…"
+                aria-label="Código modificado"
+              ></textarea>
+            </label>
+          </div>
+
+          <div class="compare-bar">
+            <p id="compareHint">Añade contenido en ambos paneles para comenzar.</p>
+            <button class="button button-primary" id="compareButton" type="button">
+              <span>Comparar versiones</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 14 0m-5-5 5 5-5 5"/></svg>
+            </button>
+          </div>
+        </section>
+
+        <section class="results" id="results" aria-labelledby="results-title" hidden>
+          <div class="results-header">
+            <div>
+              <div class="eyebrow">RESULTADO</div>
+              <h2 id="results-title">Cambios detectados</h2>
+            </div>
+            <div class="stats" aria-label="Resumen de cambios">
+              <span class="stat added"><b id="addedStat">0</b> añadidas</span>
+              <span class="stat removed"><b id="removedStat">0</b> eliminadas</span>
+              <span class="stat unchanged"><b id="unchangedStat">0</b> sin cambios</span>
+            </div>
+          </div>
+
+          <div class="diff-card">
+            <div class="diff-filebar">
+              <span><i></i>resultado.diff</span>
+              <button class="copy-button" id="copyButton" type="button">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8h11v11H8zM5 16H4V5h11v1"/></svg>
+                <span>Copiar diff</span>
+              </button>
+            </div>
+            <div class="diff-table" id="diffOutput" role="table" aria-label="Diferencias entre versiones"></div>
+          </div>
+        </section>
+      </main>
+
+      <footer>
+        <span class="footer-mark">VP</span>
+        <p>Una herramienta sencilla para revisar mejor.</p>
+        <p class="footer-tech">HTML · CSS · JavaScript</p>
+      </footer>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite">Diff copiado</div>
+    <script src="script.js"></script>
+  </body>
+</html>
